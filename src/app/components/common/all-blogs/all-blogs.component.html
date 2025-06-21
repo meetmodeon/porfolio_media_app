@@ -1,0 +1,80 @@
+<p-toast />
+<p-confirmdialog />
+<div class="container mx-auto my-2">
+  <div *ngIf="showAddBtn" class="flex justify-end mx-10 my-4">
+    <div
+      class="transition duration-300 delay-100 ease-in-out hover:-translate-y-1 hover:scale-x-110"
+    >
+      <button
+        (click)="addNewBlog()"
+        class="bg-slate-100 cursor-pointer shadow-slate-400 shadow-xl rounded py-1 px-2"
+      >
+        <i class="fa-solid fa-plus"></i>&nbsp;Blogs
+      </button>
+    </div>
+  </div>
+  <div *ngIf="isShowBlogForms()">
+    <app-add-blogs
+      [isShowBlogForms]="isShowBlogForms()"
+      (changeStatus)="changeStatus($event)"
+      (blogsAdded)="onBlogsAdded()"
+    ></app-add-blogs>
+  </div>
+
+  <div class="blogs-list md:px-20">
+    <div class="main-content grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 gap-3">
+      @for (blog of myBlogsList; track $index) {
+      <div class="card group relative ring-1 ring-slate-200 shadow-2xl shadow-slate-300 rounded mx-2 md:mx-0">
+        <span (click)="deleteBlog($event,blog.id)" class="absolute group-hover:opacity-100 opacity-0 top-1 right-2 py-1 px-2 rounded-full bg-slate-400/20"><i class="pi pi-times" style="color: green"></i></span>
+        <div class="flex flex-col mx-5">
+          <span class="text-2xl font-medium mb-5 block">{{ blog.title }}</span>
+          <span class="flex flex-row flex-wrap justify-start gap-1">
+            <p>private</p>
+            <p-toggleswitch 
+            [(ngModel)]="blog.visible"
+            (onChange)="toggleVisibility(blog.id, blog.visible)"
+            >
+        <ng-template #handle let-checked="checked">
+            <i [ngClass]="['!text-xs', 'pi', checked ? 'pi-check' : 'pi-check']"></i>
+        </ng-template>
+    </p-toggleswitch>
+    <p>public</p>
+          </span>
+          <span class="block mb-1"
+            >{{ blog.createdAt }}&nbsp; | &nbsp;<span>{{ blog.tags[0] }},</span>
+            {{ blog.tags[1] }}
+          </span>
+       
+        <span
+          *ngIf="isNew(blog.createdAt)"
+         
+          >
+          <p  class="text-[10px] inline bg-gray-300 p-1 mb-2 rounded text-gray-500"
+          >New</p>
+          </span
+        >
+        <div class="text-center md:text-left h-50 overflow-auto">
+          <p>{{ blog.description }}</p>
+        </div>
+        </div>
+      </div>
+      }
+     
+    </div>
+     <hr class="h-1 w-full bg-gray-300 border-0 mx-auto my-5" />
+  </div>
+  <div *ngIf="myBlogsList.length > 0">
+    <div
+      *ngIf="!lastPage"
+      class="float-right hover:underline mx-2 p-2 hover:bg-slate-50 hover:shadow-slate-100 hover:shadow-xl"
+    >
+      <button (click)="seeMore()">see more</button>
+    </div>
+    <div
+      *ngIf="!firstPage"
+      class="float-right hover:underline mx-2 p-2 hover:bg-slate-50 hover:shadow-slate-100 hover:shadow-xl"
+    >
+      <button (click)="previous()">Previous</button>
+    </div>
+  </div>
+</div>

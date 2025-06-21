@@ -1,0 +1,32 @@
+<div class="relative">
+    <input type="text"  class="w-full h-10 pl-12 ring-slate-300/70 ring-1" (keyup.enter)="searching($event)" />
+    <span class="absolute top-1 left-1"><i class="pi pi-search" style="font-size: 2rem"></i></span>
+</div>
+
+<div *ngIf="blogsList.length>0" class="cursor-pointer">
+    @for (blog of blogsList; track $index) {
+       <div class="relative">
+        <span (click)="viewBlogWithId(blog.id)" class="w-full block hover:shadow-gray-300 hover:shadow-xl transition duration-200 ease-in-out  hover:-translate-x-1 bg-slate-200/30 my-1 py-3 px-2">
+         {{blog.title}}
+        </span>
+        <span class="absolute top-0 right-3 text-[1rem] text-gray-500/60">Blogs</span>
+        </div>
+  
+    }
+</div>
+<div *ngIf="projectList.length>0" class="cursor-pointer">
+    @for (project of projectList; track $index) {
+       <div class="relative">
+        <span (click)="viewProjectWithId(project.id)" class="w-full block hover:shadow-gray-300 hover:shadow-xl transition duration-200 ease-in-out  hover:-translate-x-1 bg-slate-200/30 my-1 py-3 px-2">
+         {{project.title}}
+        </span>
+        <span class="absolute top-0 right-3 text-[1rem] text-gray-500/60">Projects</span>
+       </div>
+    }
+</div>
+<div *ngIf="noContent()">
+    <div class="card">
+        <p>No Content found</p>
+    </div>
+</div>
+

@@ -1,0 +1,16 @@
+.anime1 {
+  animation: fadeIn 1s ease-out forwards;
+  opacity: 0;
+  transform-origin: center; /* ✅ Scale from center */
+}
+
+@keyframes fadeIn {
+  0% {
+    transform: translateY(100%) scale(0); /* ✅ Combined */
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%) scale(1);
+    opacity: 1;
+  }
+}

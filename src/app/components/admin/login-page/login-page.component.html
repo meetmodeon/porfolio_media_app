@@ -1,0 +1,81 @@
+<p-toast></p-toast>
+<div class="container mx-auto h-screen flex flex-row justify-center items-center">
+ <div class="w-full">
+   <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+  <div class="card md:m-20 h-full">
+    <div class="flex flex-col md:flex-row justify-center items-center gap-2">
+      <div
+        class="w-full md:w-5/12 flex flex-col items-center justify-center gap-3
+        shadow-yellow-100 shadow-2xl
+        bg-slate-300 rounded-2xl
+        p-10"
+      >
+        <div class="flex flex-col gap-2">
+          <label for="email">Email</label>
+          <input pInputText formControlName="email" id="email" type="text" />
+          <div class="text-red-500" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+            Email is invalid
+          </div>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="password">Password</label>
+          <div class="relative">
+            <input
+              pInputText
+              id="password"
+              [type]="showPassword() ? 'text' : 'password'"
+              formControlName="password"
+              class="pr-10 w-full"
+              placeholder="Enter your password"
+            />
+            <i
+              class="fa-solid"
+              [ngClass]="showPassword() ? 'fa-eye-slash' : 'fa-eye'"
+              (click)="togglePassword()"
+              style="
+                position: absolute;
+                top: 50%;
+                right: 10px;
+                transform: translateY(-50%);
+                cursor: pointer;
+              "
+            ></i>
+          </div>
+          <div class="text-red-400 font-bold" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+            Password most be 5 character
+          </div>
+        </div>
+        <div class="flex" >
+          <p-button
+          [disabled]="loginForm.invalid"
+            label="Login"
+            icon="pi pi-user"
+            class="w-full max-w-[17.35rem]"
+            styleClass="w-full mx-auto"
+            type="submit"
+          />
+        </div>
+      </div>
+      <div class="w-full  md:w-2/12">
+        <p-divider layout="vertical" class=" !hidden md:!flex"
+          ><b>OR</b></p-divider
+        >
+        <p-divider layout="horizontal" class="!flex md:!hidden" align="center"
+          ><b>OR</b></p-divider
+        >
+      </div>
+      <div class="w-full md:w-5/12 flex items-center justify-center py-5">
+        <p-button
+          label="Sign Up"
+          icon="pi pi-user-plus"
+          severity="success"
+          class="w-full max-w-[17.35rem]"
+          styleClass="w-full mx-auto"
+          (onClick)="signinForm()"
+        />
+      </div>
+    </div>
+  </div>
+</form>
+ </div>
+</div>

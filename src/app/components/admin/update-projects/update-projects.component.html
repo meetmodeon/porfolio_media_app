@@ -1,0 +1,63 @@
+<form [formGroup]="projectForm"  class="max-w-3xl mx-auto p-6 bg-white rounded shadow-md space-y-6">
+    <span class="text-2xl block text-center font-bold">Update Project</span>
+   <div class="flex flex-col sm:flex-row md:flex-row justify-between mx-5">
+      <div class="form-group">
+           <label class="block text-gray-700 font-medium mb-1">Project Image</label>
+           <input type="file" (change)="handleImageChage($event)" class="w-40 border-gray-300 border-2 rounded">
+           <div *ngIf="imageUrl" class="size-50">
+            <img [src]="imageUrl" alt="preview" class="bg-cover rounded-2xl">
+           </div>
+        </div>
+       <div class="form-group">
+           <label class="block text-gray-700 font-medium mb-1">Cover Image</label>
+           <input type="file" (change)="handleImageChage2($event)" class="w-40 border-gray-300 border-2 rounded">
+           <div *ngIf="coverUrl" class="size-50">
+            <img [src]="coverUrl" alt="preview" class="bg-cover rounded-2xl">
+           </div>
+        </div>
+   </div>
+  <div>
+    <label for="title" class="block text-gray-700 font-medium mb-1">Title</label>
+    <input formControlName="title" id="title" type="text"
+      class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300" />
+    <div *ngIf="projectForm.get('title')?.invalid && projectForm.get('title')?.touched" class="text-red-500 text-sm">
+      Title is required
+    </div>
+  </div>
+
+  <!-- Description -->
+  <div>
+    <label for="description" class="block text-gray-700 font-medium mb-1">Description</label>
+    <textarea formControlName="description" id="description" rows="4"
+      class="w-full px-4 py-2 border border-gray-300 rounded resize-none focus:outline-none focus:ring focus:ring-blue-300 overflow-y-auto"></textarea>
+    <div *ngIf="projectForm.get('description')?.invalid && projectForm.get('description')?.touched" class="text-red-500 text-sm">
+      Description is required
+    </div>
+  </div>
+
+  <!-- Tags -->
+  <div formArrayName="tags">
+    <button type="button" (click)="addTags()">+Add Tags</button><br><br>
+    <!-- <label class="block text-gray-700 font-medium mb-1">Tags</label> -->
+    @for (tag of tags.controls; track $index;let i=$index) {
+            <input type="text" id="tag-{{i}}" [formControlName]="i" class="border-gray-500 border-2 my-2">
+           <button class="size-7 bg-yellow-200 ml-1 rounded-full text-red-500" (click)="removeTags(i)" *ngIf="tags.length>1"><i class="fa-solid fa-xmark "></i></button>
+    }
+    <div *ngIf="projectForm.get('tags')?.invalid && projectForm.get('tags')?.touched" class="text-red-500 text-sm">
+      At least one tag is required
+    </div>
+  </div>
+
+
+  <!-- Submit Button -->
+  <div class="text-right">
+    <button class="bg-green-300 hover:bg-green-400 p-2 text-white rounded-xl mr-2" routerLink="/admin/dashboard">
+        Back to home?
+    </button>
+    <button 
+      class="bg-blue-500 text-white p-2 rounded-xl hover:bg-blue-600 disabled:opacity-50"
+      [disabled]="projectForm.invalid"
+      (click)="onUpdate()"
+      >Update project</button>
+  </div>
+</form>

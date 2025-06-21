@@ -1,0 +1,15 @@
+// .spin-border::before {
+//   content: "";
+//   position: absolute;
+//   inset: 0;
+//   border: 2px solid transparent;
+//   border-top-color: black;
+//   border-radius: 1rem;
+//   animation: spin 1s linear infinite;
+//   z-index: 0;
+// }
+
+// @keyframes spin {
+//   0%   { transform: translateX(200); }
+//   100% { transform: translate(200,200); }
+// }

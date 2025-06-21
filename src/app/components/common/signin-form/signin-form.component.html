@@ -1,0 +1,84 @@
+<div class="container mx-auto my-10">
+    <div class="card">
+           <form [formGroup]="userFormData"  class="max-w-3xl mx-auto p-6 bg-white rounded shadow-md space-y-6">
+    <span class="text-2xl block text-center font-bold">Registation User</span>
+   <div class="flex flex-col sm:flex-row md:flex-row justify-between mx-5">
+      <div class="form-group">
+           <label class="block text-gray-700 font-medium mb-1">Profile pic</label>
+           <input type="file" (change)="selectedImage($event)" class="w-40 border-gray-300 border-2 rounded">
+           <div *ngIf="profileUrl" class="size-50">
+            <img [src]="profileUrl" alt="preview" class="bg-cover rounded-2xl">
+           </div>
+        </div>
+       
+   </div>
+  <div>
+    <label for="name" class="block text-gray-700 font-medium mb-1">Name*</label>
+    <input formControlName="name" id="name" type="text"
+      class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300" />
+    <div *ngIf="userFormData.get('name')?.invalid && userFormData.get('name')?.touched" class="text-red-500 text-sm">
+      Name is required
+    </div>
+  </div>
+
+  <div>
+    <label for="email" class="block text-gray-700 font-medium mb-1">Email*</label>
+    <input formControlName="email" id="email" type="text" placeholder="Ex:example@gmail.com"
+      class="w-full px-4 py-2 border placeholder:text-gray-400 border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300" />
+    <div *ngIf="userFormData.get('email')?.invalid && userFormData.get('email')?.touched" class="text-red-500 text-sm">
+      Email is required
+    </div>
+  </div>
+
+  <div class=" relative">
+    <label for="password" class="block text-gray-700 font-medium mb-1">Password*</label>
+    <input formControlName="password" id="password" [type]="textType()?'password':'text'"
+      class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300" />
+      <span class="absolute right-2 top-9" (click)=showPassword()><i class="fa fa-eye"></i></span>
+    <div *ngIf="userFormData.get('password')?.invalid && userFormData.get('password')?.touched" class="text-red-500 text-sm">
+      Password is required
+      Password length is greater than 8 character
+    </div>
+  </div>
+
+  <div>
+    <label for="specialized" class="block text-gray-700 font-medium mb-1">Specialized*</label>
+    <input formControlName="specialized" id="specialized" type="text" placeholder="Ex: Java full stack developer"
+      class="w-full px-4 py-2 border placeholder:text-gray-400 border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300" />
+    <div *ngIf="userFormData.get('specialized')?.invalid && userFormData.get('specialized')?.touched" class="text-red-500 text-sm">
+      Specialized is required
+    </div>
+  </div>
+
+  <!-- Description -->
+  <div>
+    <label for="description" class="block text-gray-700 font-medium mb-1">Description*</label>
+    <textarea formControlName="description" id="description" rows="4"
+      class="w-full px-4 py-2 border border-gray-300 rounded resize-none focus:outline-none focus:ring focus:ring-blue-300 overflow-y-auto"></textarea>
+    <div *ngIf="userFormData.get('description')?.invalid  && userFormData.get('description')?.touched" class="text-red-500 text-sm">
+      Description is required.
+      Description is must be greater then 20 character.
+    </div>
+  </div>
+
+  <!-- Tags -->
+
+
+  <!-- Submit Button -->
+   <!-- Submit Button -->
+ <div class="text-right w-full">
+   <div class="[&>*]:mx-2">
+    <p-button label="Clear All" type="button" [outlined]="true" [text]="true" severity="secondary" (onClick)="reset()" />
+    <p-button  type="button" label="Save"
+    icon="pi pi-check"
+     [loading]="loading"
+     [disabled]="userFormData.invalid"
+    (onClick)="onSave()"/>
+   </div>
+ </div>
+ <div class="text-left">
+    <a routerLink="/login">Back to login?</a>
+ </div>
+</form>
+    </div>
+</div>

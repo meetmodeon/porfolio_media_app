@@ -1,0 +1,15 @@
+<p-card [style]="{ width: '25rem', overflow: 'hidden',}" class="z-20" >
+        <ng-template #header>
+            <img alt="meet-logo.png" class="w-full bg-cover" [src]="'data:imag/png;base64,'+myData?.returnImg" />
+        </ng-template>
+        <ng-template #title> {{ myData?.name }} </ng-template>
+        <ng-template #subtitle> {{ myData?.specialized}} </ng-template>
+        <p>
+            {{myData?.description}}
+        </p>
+        <ng-template #footer>
+            <div class="flex justify-center mt-1">
+                <p-button label="close"  class="w-full" styleClass="w-full" (onClick)="hidePage()"/>
+            </div>
+        </ng-template>
+    </p-card>

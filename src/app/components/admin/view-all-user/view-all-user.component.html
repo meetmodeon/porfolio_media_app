@@ -1,0 +1,83 @@
+<p-toast />
+<p-confirmPopup></p-confirmPopup>
+<div class="container mx-auto ">
+    <div class="card">
+
+      <p-table
+        [value]="userListData"
+        [paginator]="true"
+        [rows]="5"
+        [tableStyle]="{ 'min-width': '50rem' }"
+        [rowsPerPageOptions]="[5, 10, 20]"
+      >
+
+        <ng-template #header>
+          <tr>
+            <th style="width: 10%">Id:{{userData.id}}</th>
+            <th style="width: 15%">Name</th>
+            <th style="width: 10%">Email</th>
+            <th style="width: 10%">profile Pic</th>
+            <th style="width: 10;">Role</th>
+            <th style="width: 10%">Specialized</th>
+            <th style="width: 15%">Description</th>
+            <th style="width: 20%;">Action</th>
+          </tr>
+        </ng-template>
+        <ng-template #body let-userData>
+          <tr>
+            <td>{{ userData.id }}</td>
+            <td>{{ userData.name}}</td>
+            <td>{{ userData.email }}</td>
+            <td>
+                <p-avatar-group>
+        <p-avatar [image]="'data:'+userData.returnImageType+';base64,'+userData.returnImg" alt="meet-logo.png" shape="circle" />
+       
+    </p-avatar-group>
+            </td>
+            <td>{{ userData.role }}</td>
+            
+            <td >{{ userData.specialized }}</td>
+            <td>{{ userData.description}}</td>
+            
+            <td>
+             <p-button type="button" [outlined]="true" pTooltip="View Profile" tooltipPosition="top" (click)="showProfile(userData.id)"  class="m-1"><i class="pi pi-eye p-1"></i></p-button>
+             <p-button severity="danger" pTooltip="Delete User" [outlined]="true" (click)="deleteUserById($event,userData.id)">
+               <i class="pi pi-trash p-1"></i>
+             </p-button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+   
+</div>
+
+ <div class="flex md:justify-center overflow-auto ">
+         <p-dialog [(visible)]="dialogVisible" [modal]="true" [style]="{ width: '25rem' }">
+  <ng-template #header>
+    <div class="inline-flex items-center justify-center gap-2">
+      <p-avatar [image]="userData.returnImg !== null ? 'data:image/png;base64,'+userData.returnImg:'meet-logo.png'"  shape="circle" />
+      <span class="font-bold whitespace-nowrap">{{userData.name}}</span>
+    </div>
+  </ng-template>
+
+  <span class="text-surface-500 dark:text-surface-400 block mb-8 text-3xl">User Info</span>
+   <div class="flex-col m-2 sm:[&>*]:m-2 md:[&>*]:m-5">
+    <div>
+   <span  class="text-xl font-medium">Email: </span><span class="text-xl">{{userData.email}}</span>
+   </div>
+   <div>
+   <span class="text-xl font-medium">Details: </span><p class="text-xl h-20 w-full overflow-auto">{{userData.description}}</p>
+   </div>
+   <div>
+   <span class="text-xl font-medium">Specialized: </span><span class="text-xl">{{userData.specialized}}</span>
+   </div>
+   <div>
+   <span class="text-2xl font-medium">Role: </span><span class="text-xl">{{userData.role}}</span>
+   </div>
+   </div>
+  <ng-template #footer>
+    <p-button label="Cancel" type="button" [outlined]="true" [text]="true" severity="secondary" (onClick)="hideDialog()" />
+  </ng-template>
+</p-dialog>
+    </div>

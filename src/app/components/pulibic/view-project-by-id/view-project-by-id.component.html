@@ -1,0 +1,33 @@
+
+   <p-toast></p-toast>
+   <div class="p-8 flex items-center justify-center h-full w-full">
+    <p-card [style]="{ width: '25rem', overflow: 'hidden' }">
+        <ng-template #header>
+            <div *ngIf="isImageAvailable()" class="flex flex-col md:flex-row gap-1">
+                <img *ngIf="projectData.returnCoverImg !== null" alt="Card" class="w-full md:w-1/2 rounded" [src]="'data:'+projectData.returnCoverImageType+';base64,'+projectData.returnCoverImg" />
+        <img *ngIf="projectData.returnDemoImg !== null" alt="Card" class="w-full md:w-1/2 rounded" [src]="'data:'+projectData.returnDemoImageType+';base64,'+projectData.returnDemoImg" />
+            </div>
+         </ng-template>
+
+        <ng-template #title> {{projectData.title}} </ng-template>
+        <ng-template #subtitle> {{projectData.tags}} </ng-template>
+        <p>{{projectData.createdAt}}</p>
+        <div *ngIf="projectData.sourceCodeLink" class="overflow-y-auto inline"> 
+            <span class="font-medium">Source code:</span>&nbsp;
+            <a [href]="projectData.sourceCodeLink" target="_blank" class="overflow-auto">{{projectData.sourceCodeLink}}</a>
+          </div>
+          <div *ngIf="projectData.liveDemoLink" class="overflow-y-auto inline"> 
+           
+            <a [href]="projectData.liveDemoLink" target="_blank" class="overflow-auto text-red-600 " pTooltip="Live project demo" tooltipPosition="top"> <span class="font-medium ">live Demo:</span>&nbsp;<i class="fa-solid fa-location-dot animate-ping"></i></a>
+          </div>
+        <p>
+           {{projectData.description}}
+        </p>
+        <ng-template #footer>
+            <div class="flex gap-4 mt-1">
+                <p-button routerLink="/" label="Home" severity="secondary" icon="pi pi-home" class="w-full" [outlined]="true" styleClass="w-full" />
+                <!-- <p-button label="Save" class="w-full" styleClass="w-full" /> -->
+            </div>
+        </ng-template>
+    </p-card>
+</div>
