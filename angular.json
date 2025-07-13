@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "allowedCommonJsDependencies": ["qrcode"],
             "outputPath": "dist/portfolio-ui",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -29,9 +30,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.scss"  
-            ],
+            "styles": ["src/styles.scss"],
             "scripts": []
           },
           "configurations": {
