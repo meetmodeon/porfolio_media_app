@@ -10,6 +10,7 @@ import { BlogsResponse } from '../../modules/blogs-response';
 })
 export class BlogsServiceService {
   apiUrl=environment.apiUrl;
+  // portfolio";
 
   constructor(private http:HttpClient) { }
 

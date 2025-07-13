@@ -13,6 +13,7 @@ export class MyDetailsServiceService {
 
   constructor(private http:HttpClient) { }
   private apiUrl=environment.apiUrl;
+  // +"/portfolio";
 
   login(loginRequest:LoginRequest):Observable<any>{
     return this.http.post(`${this.apiUrl}/myDetails/login`,loginRequest);
@@ -30,7 +31,7 @@ export class MyDetailsServiceService {
     return this.http.get(`${this.apiUrl}/myDetails/getMyDetails/${userId}`)
   }
   saveUserInfo(userData:any):Observable<any>{
-    return this.http.post(`${this.apiUrl}/myDetails/saveUserInfo`,userData);
+    return this.http.post(`${this.apiUrl}/saveUserInfo`,userData);
   }
   searching(keyword:any):Observable<any>{
     const params=new HttpParams()
@@ -48,7 +49,7 @@ export class MyDetailsServiceService {
   }
 
   getNoOfNewUser():Observable<any>{
-    return this.http.get<{ TotalUser: number }>(`${this.apiUrl}/myDetails/getTotalNewUser`);
+    return this.http.get<{ TotalUser: number }>(`${this.apiUrl}/portfolio/myDetails/getTotalNewUser`);
   }
 
   getAllUser(pageIndex:number=0,pageSize:number=10):Observable<any>{
@@ -82,5 +83,11 @@ export class MyDetailsServiceService {
   }
   getCountOfPut():Observable<any>{
     return this.http.get(`${this.apiUrl}/actuator/metrics/http.server.requests?tag=method:PUT`)
+  }
+  loginWithGoogle():Observable<any>{
+    return this.http.get(`${this.apiUrl}/login/oauth2/code/google`)
+  }
+  loginWithGithub():Observable<any>{
+    return this.http.get(`${this.apiUrl}/login/oauth2/code/github`);
   }
 }

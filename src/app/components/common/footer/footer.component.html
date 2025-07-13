@@ -1,40 +1,66 @@
-
 <div class="container mx-auto mt-3">
-   <div class="float-right">
+  <div class="relative !bg-amber-300 size-20 float-left">
+      <!-- QR Code -->
+      <qrcode
+        [qrdata]="qrValue"
+        [width]="100"
+        [errorCorrectionLevel]="'H'"
+        class="w-full h-full"
+      ></qrcode>
+
+      <!-- Centered Logo -->
+      <img
+        src="meet-logo.png"
+        alt="Logo"
+        class="absolute top-[60%] left-[60%] w-8 h-8 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white shadow-lg"
+      />
+    </div>
+  <div class="float-right mb-5 mr-2">
     <ul>
-    <li class="text-center w-full">
-        <button (click)="showContactDialog()" routerLinkActive="text-red-500" class=" cursor-pointer transition duration-300 delay-200 ease-in-out hover:-translate-y-1 hover:scale-110 px-3 py-2 bg-indigo-200 rounded-2xl">Connect_Us</button>
-      </li>
-   </ul>
-   </div>
-  <div
-  class="end w-full flex flex-col justify-center items-center sm:my:3 md:my-7"
->
-  <div>
-    <ul
-      class="link-logo w-full flex gap-2 justify-center items-center mb-1 [&>*]:text-2xl [&>*]:hover:cursor-pointer [&>*]:hover:text-blue-400"
-    >
-      <li>
-        <a href="" target="_blank"> <i class="fa-brands fa-facebook"></i></a>
-      </li>
-      <li>
-        <a href="https://www.linkedin.com/in/methal-yadav-meet-27903329a/" target="_blank">
-            <i class="fa-brands fa-linkedin"></i>
-        </a>
-      </li>
-      <li>
-        <a href="https://github.com/meetmodeon" target="_blank">
-            <i class="fa-brands fa-github"></i>
-        </a>
-      </li>
-      <li>
-        <a href=""><i class="fa-brands fa-twitter"></i></a>
+      <li
+        class="text-center w-full active:ring-black active:ring-1 active:-translate-y-0.5 active:scale-110"
+      >
+        <button
+          (click)="showContactDialog()"
+          routerLinkActive="text-red-500"
+          class="cursor-pointer transition duration-300 delay-200 ease-in-out hover:-translate-y-1 hover:scale-110 px-3 py-2 bg-indigo-200 rounded-2xl"
+        >
+          Connect_Us
+        </button>
       </li>
     </ul>
   </div>
-  <div class="copy-right mt-5">
-    <p>Copyright ©2025 All rights reserved to Meet_Yadav</p>
+  <div
+    class="end w-full flex flex-col justify-center items-center sm:my:3 md:my-7"
+  >
+    
+    <div>
+      <ul
+        class="link-logo w-full flex gap-2 justify-center items-center mb-1 [&>*]:text-2xl [&>*]:hover:cursor-pointer [&>*]:hover:text-blue-400"
+      >
+        <li>
+          <a href="" target="_blank"> <i class="fa-brands fa-facebook"></i></a>
+        </li>
+        <li>
+          <a
+            href="https://www.linkedin.com/in/methal-yadav-meet-27903329a/"
+            target="_blank"
+          >
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/meetmodeon" target="_blank">
+            <i class="fa-brands fa-github"></i>
+          </a>
+        </li>
+        <li>
+          <a href=""><i class="fa-brands fa-twitter"></i></a>
+        </li>
+      </ul>
+    </div>
+    <div class="copy-right mt-5 text-center">
+      <p>Copyright ©2025 All rights reserved to Meet_Yadav</p>
+    </div>
   </div>
-</div>
-  
 </div>

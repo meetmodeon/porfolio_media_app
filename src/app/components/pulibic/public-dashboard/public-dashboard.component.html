@@ -1,9 +1,12 @@
 <div class="container mx-auto">
   <div class="sticky top-3 z-10  w-full flex flex-row justify-center items-center my-2">
     <div class=" w-full rounded-3xl ">
+     
       <div
       (click)="search()"
-        class=" float-right flex flex-row px-6 mx-4 gap-4 bg-slate-200/20 rounded ring-slate-100 text-gray-500/90 ring-1 hover:ring-black hover:ring-1"
+        class=" float-right flex flex-row px-6 mx-4 gap-4 bg-slate-200/20 rounded ring-slate-100 text-gray-500/90 ring-1 hover:ring-black hover:ring-1
+        active:ring-black active:ring-1 
+        "
       >
         <span 
           ><i class="fa-solid fa-search"></i
@@ -15,34 +18,45 @@
 
   <div class="sticky top-10 z-10 mb-5">
     <ul class="flex justify-between items-center mx-2 gap-1 md:gap-3">
-      <li
-        (click)="active(1)"
-        routerLinkActive="bg-slate-400"
-        class="w-1/2 cursor-pointer"
-      >
-        <a
-          class="block transition delay-500 duration-500 ease-in-out hover:-translate-y-1 hover:scale-110 w-full text-center bg-gray-400/20 hover:bg-gray-400 shadow-gray-400/50 shadow-xl rounded-2xl"
-        >
-          Project
-        </a>
-      </li>
+  <li
+    (click)="active(1)"
+    [ngClass]="{
+      'bg-blue-500 text-white scale-95': tab === 1,
+      'bg-gray-400/20': tab !== 1
+    }"
+    class="w-1/2 cursor-pointer transition-all duration-200 transform rounded-2xl shadow-md active:scale-95"
+    role="button"
+    [attr.aria-pressed]="tab === 1"
+  >
+    <a
+      class="block text-center py-2 px-4"
+    >
+      Blogs
+    </a>
+  </li>
 
-      <li
-        (click)="active(2)"
-        routerLinkActive="bg-slate-100"
-        class="w-1/2 cursor-pointer"
-      >
-        <a
-          class="block transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 w-full text-center bg-gray-400/20 hover:bg-gray-400 shadow-gray-400/50 shadow-xl rounded-2xl"
-        >
-          Blogs
-        </a>
-      </li>
-    </ul>
+  <li
+    (click)="active(2)"
+    [ngClass]="{
+      'bg-blue-500 text-white scale-95': tab === 2,
+      'bg-gray-400/20': tab !== 2
+    }"
+    class="w-1/2 cursor-pointer transition-all duration-200 transform rounded-2xl shadow-md active:scale-95"
+    role="button"
+    [attr.aria-pressed]="tab === 2 "
+  >
+    <a
+      class="block text-center py-2 px-4"
+    >
+      Projects
+    </a>
+  </li>
+</ul>
+
   </div>
 
-  <div class="h-full w-full bg-slate-300/10 rounded-t-2xl">
-    <ng-container *ngTemplateOutlet="tab === 2 ? tab1 : tab2"></ng-container>
+  <div class="h-full w-full rounded-t-2xl">
+    <ng-container *ngTemplateOutlet="tab === 1 ? tab1 : tab2"></ng-container>
     <ng-template #tab1>
       <div
         class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
@@ -66,12 +80,34 @@
             <p class="m-0 overflow-auto h-30">
               {{ blogsData.description }}
             </p>
+           
           </p-card>
         </div>
         }
+         
       </div>
+      <div *ngIf="blogsListData.length==0">
+              <div class="w-full p-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
+               <p-skeleton size="20rem" />
+               <p-skeleton size="20rem" />
+               <p-skeleton size="20rem"/>
+               <p-skeleton size="20rem"/>
+            </div>
+        </div>
+            </div>
     </ng-template>
     <ng-template #tab2>
+      <div *ngIf="projectListData.length==0">
+              <div class="w-full p-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+               <p-skeleton size="20rem" />
+               <p-skeleton size="20rem" />
+               <p-skeleton size="20rem"/>
+               <p-skeleton size="20rem"/>
+            </div>
+        </div>
+            </div>
       <div
         class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4"
       >

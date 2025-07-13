@@ -101,7 +101,7 @@ export class DashboardComponent {
   defaultShow=signal<boolean>(true);
   showAllUser=signal<boolean>(false);
   userReloadCount=0;
-
+  showMenu:boolean=false;
   constructor(
     private share: StateService,
     private messageService: MessageService,
@@ -188,6 +188,9 @@ export class DashboardComponent {
         },
       },
     ];
+  }
+  menuToggle(){
+    this.showMenu=!this.showMenu;
   }
   hidePage() {
     this.isShowProfile.set(false);

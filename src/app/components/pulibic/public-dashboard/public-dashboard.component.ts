@@ -10,7 +10,8 @@ import { formatDistanceToNow } from 'date-fns';
 import { DialogService, DynamicDialogModule, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { SearchingComponentComponent } from '../searching-component/searching-component.component';
 import { Footer } from 'primeng/api';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
   selector: 'app-public-dashboard',
@@ -20,6 +21,7 @@ import { RouterLink } from '@angular/router';
     CardModule,
     DynamicDialogModule,
     RouterLink,
+    SkeletonModule
     
   ],
   providers:[DialogService],
@@ -41,13 +43,18 @@ export class PublicDashboardComponent{
     private blogsService:BlogsServiceService,
     private userService:MyDetailsServiceService,
     private dialogService:DialogService,
+    private activeRoute:ActivatedRoute,
+
 
   ){
-
+    // const blogsData=this.activeRoute.snapshot.data['dataList'];
+    // this.blogsListData=blogsData.content;
+    // const projectDatas=this.activeRoute.snapshot.data['projectList']
+    // this.projectListData=projectDatas.content;
   }
   ngOnInit(){
-     this.getBlogs(this.pageIndex);
-    this.getAllProject(this.pageIndex);
+   this.getBlogs(this.pageIndex);
+   this.getAllProject(this.pageIndex);
   }
 
   

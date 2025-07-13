@@ -13,6 +13,7 @@ import { Toast } from 'primeng/toast';
 import { TooltipModule } from 'primeng/tooltip';
 
 
+
 @Component({
   selector: 'app-navbar',
   imports: [
@@ -25,7 +26,8 @@ import { TooltipModule } from 'primeng/tooltip';
     ConfirmPopup,
     Toast,
     TooltipModule,
-  
+   
+
 
   ],
   providers:[MessageService,ConfirmationService],
@@ -37,6 +39,7 @@ export class NavbarComponent {
    items: MenuItem[''] | undefined;
    setlabel=signal<string>('');
    userId:number|any;
+   
 
   constructor(private stateService:StateService,
     private messageService:MessageService,
@@ -100,10 +103,19 @@ export class NavbarComponent {
     ];
     }else{
       this.items = [
+        {
+        label: 'Home',
+        icon: 'pi pi-home',
+        command: () => {
+         this.router.navigateByUrl('');
+        },
+      },
       {
         label: 'Login',
         icon: 'pi pi-user',
         command: () => {
+           console.log("Trying to vibrate...");
+          navigator.vibrate?.(50);
          this.router.navigateByUrl("/login");
         },
       },

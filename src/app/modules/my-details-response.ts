@@ -1,5 +1,5 @@
 export interface MyDetailsResponse {
-    id?:string
+    id?:string,
     email:string|undefined,
     name:string,
     role:string,
@@ -8,4 +8,6 @@ export interface MyDetailsResponse {
     returnImageName?:string,
     returnImageType?:string,
     description:string,
+    cvFileName?:string,
+    cvFile?:string;
 }

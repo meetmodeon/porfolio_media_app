@@ -1,5 +1,5 @@
 <p-toast></p-toast>
-<div class="container mx-auto h-screen flex flex-row justify-center items-center">
+<div class="container mx-auto h-screen flex flex-row justify-center items-center p-5">
  <div class="w-full">
    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
   <div class="card md:m-20 h-full">
@@ -54,6 +54,25 @@
             styleClass="w-full mx-auto"
             type="submit"
           />
+        </div>
+        <div class="forget active:text-blue-300 active:underline">
+          <a routerLink="/forgetPassword">forget password?</a>
+        </div>
+        <div class="text-center">
+          <span class="block text-[1.2rem]">Sigin With Other ?</span>
+          <div class="flex justify-center items-center gap-2 text-xl ">
+            <!-- <span  class="active:text-blue-400/50">
+               <a href="http://localhost:8080/oauth2/authorization/github">
+                <i class="fa-brands fa-github"></i>
+              </a>
+              
+            </span> -->
+            <span class="active:text-blue-400/50">
+              <a href="http://localhost:8080/oauth2/authorization/google">
+                <i class="fa-brands fa-google"></i>
+              </a>
+            </span>
+          </div>
         </div>
       </div>
       <div class="w-full  md:w-2/12">

@@ -3,7 +3,7 @@ import { DividerModule } from 'primeng/divider';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink} from '@angular/router';
+import { Router, RouterModule} from '@angular/router';
 import {
   FormBuilder,
   FormGroup,
@@ -17,7 +17,6 @@ import { ToastModule } from 'primeng/toast';
 import { signal } from '@angular/core';
 import { UserStorageService } from '../../../service/userStorage/user-storage.service';
 import { MyDetailsResponse } from '../../../modules/my-details-response';
-import { error } from 'console';
 import { StateService } from '../../common/state/state.service';
 
 @Component({
@@ -29,6 +28,9 @@ import { StateService } from '../../common/state/state.service';
     CommonModule,
     ReactiveFormsModule,
     ToastModule,
+    RouterModule,
+    
+
   ],
   providers: [MessageService],
   templateUrl: './login-page.component.html',
@@ -57,6 +59,9 @@ export class LoginPageComponent {
 
   onLogin() {
     const loginData: LoginRequest = this.loginForm.value;
+    window.localStorage.removeItem('token');
+    window.localStorage.removeItem('myData');
+    sessionStorage.removeItem('showComponent');
     this.myDetailsService.login(loginData).subscribe({
       next: (res: any) => {
         const token=res.jwtToken;
@@ -110,5 +115,19 @@ export class LoginPageComponent {
   signinForm(){
     console.log("click signin button")
     this.router.navigateByUrl('/signin');
+  }
+  loginWithGithub(){
+    this.myDetailsService.loginWithGithub().subscribe({
+      next:(value:any)=>{
+        console.log("Successful login with github",value);
+      }
+    })
+  }
+  loginWithGoogle(){
+    this.myDetailsService.loginWithGoogle().subscribe({
+      next:(value:any)=>{
+        console.log("Successfully login with google",value);
+      }
+    })
   }
 }

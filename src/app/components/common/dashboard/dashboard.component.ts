@@ -41,6 +41,8 @@ export class DashboardComponent {
     specialized:'',
     returnImg:'',
     description:'',
+    cvFileName:'',
+    cvFile:''
   };
   myBlogsList!:BlogsResponse[];
   myProjectsList!:ProjectResponse[];
@@ -51,6 +53,9 @@ export class DashboardComponent {
   imgMsg:string='';
   allowedType=['image/jpeg','image/png','image/jpg'];
   isAuth=false;
+  isShowView=false;
+  isShowBoth=false;
+  isShowUpload=false;
   pageIndex=0;
   cvPdfFile:File|string|any;
   constructor(
@@ -71,6 +76,26 @@ export class DashboardComponent {
     this.getBlogs(this.userId,this.pageIndex);
     this.getAllProjects(this.userId,this.pageIndex);
     this.isAuth=UserStorageService.isAuthenticate();
+    this.viewResumeBtn();
+  }
+  viewResumeBtn(){
+    if(UserStorageService.isAuthenticate() && this.myData.cvFileName !== ''){
+      console.log(this.myData.cvFileName);
+      this.isShowBoth=true;
+    }else if(!UserStorageService.isAuthenticate() && this.myData.cvFileName!==''){
+      console.log(this.myData.cvFileName);
+      this.isShowBoth=false;
+      this.isShowUpload=false;
+      this.isShowView=true;
+    }else if(UserStorageService.isAuthenticate() && this.myData.cvFileName===''){
+      this.isShowUpload=true;
+      this.isShowBoth=false;
+      this.isShowView=false;
+    }else{
+      this.isShowBoth=false;
+      this.isShowView=false;
+      this.isShowUpload=false;
+    }
   }
   getMyDetials(userId:any){
     this.myDetailsService.getMyDetails(userId).subscribe({

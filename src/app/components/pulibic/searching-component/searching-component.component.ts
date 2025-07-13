@@ -42,9 +42,9 @@ export class SearchingComponentComponent {
   }
 
   searching(words:Event){
-    
     const keyboardEvent=words as KeyboardEvent;
     const input=keyboardEvent.target as HTMLInputElement;
+    input.blur();
     const keywords=input.value.trim();
     console.log("searcning is click from searching components",keywords);
     this.myDetailsService.searching(keywords).subscribe({

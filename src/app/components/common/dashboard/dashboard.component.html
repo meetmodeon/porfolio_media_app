@@ -29,13 +29,28 @@
       <span>
         {{ myData.description }}
       </span>
-      <div class="download-btn md:my-2">
-        @if (!isAuth) {
-         
+      <div class="download-btn flex flex-col sm:flex-col md:flex-row lg:flex-row gap-2 md:my-2">
+        @if (isShowView) {
+           <button (click)="downloadResume()" class="transition duration-150 ease-in-out hover:-translate-1 hover:scale-105 bg-red-400 text-white shadow-black shadow-md rounded p-3 cursor-pointer hover:bg-red-500/80">
+            View Resume
+          </button>
+        }@else if(isShowBoth) {
           <button (click)="downloadResume()" class="transition duration-150 ease-in-out hover:-translate-1 hover:scale-105 bg-red-400 text-white shadow-black shadow-md rounded p-3 cursor-pointer hover:bg-red-500/80">
             View Resume
           </button>
-        }@else {
+           <button 
+           (click)="triggerFile(fileInput)"
+           class="transition duration-150 ease-in-out hover:-translate-1 hover:scale-105 bg-red-400 text-white shadow-black shadow-md rounded p-3 cursor-pointer hover:bg-red-500/80">
+            Upload CV
+          </button>
+          <input
+          #fileInput
+          type="file"
+          accept=".pdf,application/pdf"
+          class="hidden"
+          (change)="onCvFileSelected($event)"
+          />
+        }@else if (isShowUpload) {
            <button 
            (click)="triggerFile(fileInput)"
            class="transition duration-150 ease-in-out hover:-translate-1 hover:scale-105 bg-red-400 text-white shadow-black shadow-md rounded p-3 cursor-pointer hover:bg-red-500/80">

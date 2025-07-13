@@ -1,0 +1,9 @@
+services:
+     pmd-ui:
+      image: portfolio-ui
+     container_name: pmd-ui-container
+     
+     ports:
+       - 4200:8080
+     restart: always
+

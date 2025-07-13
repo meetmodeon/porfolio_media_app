@@ -19,6 +19,11 @@ import { SearchingComponentComponent } from './components/pulibic/searching-comp
 import { ViewBlogsByIdComponent } from './components/pulibic/view-blogs-by-id/view-blogs-by-id.component';
 import { ViewProjectByIdComponent } from './components/pulibic/view-project-by-id/view-project-by-id.component';
 import { CommonErrorComponent } from './components/pulibic/common-error/common-error.component';
+import { BlogResolverService } from './core/resolver/blog-resolver.service';
+import { ProjectResolverService } from './core/resolver/project-resolver.service';
+import { Oauth2LoginComponent } from './components/common/oauth2-login/oauth2-login.component';
+import { ForgetPasswordComponent } from './components/pulibic/forget-password/forget-password.component';
+
 export const routes: Routes = [
     {
         path:"",
@@ -28,7 +33,11 @@ export const routes: Routes = [
     
     {
         path:"public/dashboard",
-        component:PublicDashboardComponent
+        component:PublicDashboardComponent,
+        // resolve:{
+        //     dataList: BlogResolverService,
+        //     projectList:ProjectResolverService
+        // }
     },
     {
         path:"common/dashboard/:id",
@@ -82,6 +91,14 @@ export const routes: Routes = [
     {
         path:"contact",
         component:ContactUsComponent
+    },
+    {
+        path:'oauth2/callback',
+        component:Oauth2LoginComponent
+    },
+    {
+        path:'forgetPassword',
+        component:ForgetPasswordComponent
     },
     {
         path:'admin/updateBlogs/:id',

@@ -91,7 +91,6 @@ export class ViewAllUserComponent{
     this.myDetailsService.getAllUser(this.pageIndex).subscribe({
       next:(value:any)=>{
         this.userListData=value.content; 
-        this.userData.id='1';
         console.log("this is userlistdata, ",this.userListData);
         this.userListData.forEach(data=>{
           if(data.description.length>20){
